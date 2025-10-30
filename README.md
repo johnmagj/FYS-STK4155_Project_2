@@ -1,6 +1,6 @@
 # Project 2, FYS-STK4155 
 
-This repository is for Project 2 on Neural Networks in the course **FYS-STK4155 - Applied Data Analysis and Machine Learning**, as taught at the **University of Oslo** during the autumn semester of 2025.
+#### This repository is for Project 2 on Neural Networks in the course **FYS-STK4155 - Applied Data Analysis and Machine Learning**, as taught at the **University of Oslo** during the autumn semester of 2025.
 
 In this project we implemented a Feedforward Neural Network from scratch and tested it on several regression and classification problems.
 
