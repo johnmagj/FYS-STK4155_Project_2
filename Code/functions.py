@@ -39,7 +39,7 @@ def mse_der(predict, target):
     return 2*np.mean(predict-target)
 
 def softmax(x):
-    e_x = np.exp(x - np.max(x, axis=0))
-    return e_x / np.sum(e_x, axis=1)[:, np.newaxis]
+    e_x = np.exp(x - np.max(x, axis=1, keepdims=True))
+    return e_x / (np.sum(e_x, axis=1, keepdims=True) + 1e-10)
 
 
