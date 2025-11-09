@@ -4,11 +4,14 @@ import numpy as np
 Activation functions and their derivatives
 """
 
-def sigmoid(x):
-    return 1 / (1+np.exp(-x))
+def sigmoid(X):
+    try:
+        return 1.0 / (1 + np.exp(-X))
+    except FloatingPointError:
+        return np.where(X > np.zeros(X.shape), np.ones(X.shape), np.zeros(X.shape))
 
 def sigmoid_der(x):
-    return np.exp(-x)/((1+np.exp(-x))**2)
+    return sigmoid(x)*(1-sigmoid(x))
 
 def ReLU(x):
     return np.where(x > 0, x, 0)
