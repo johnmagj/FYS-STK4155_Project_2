@@ -1,4 +1,4 @@
-import numpy as np
+import autograd.numpy as np
 import Scheduler
 from copy import deepcopy
 
@@ -38,7 +38,7 @@ class NeuralNetwork(object):
         self._classifier_mode = classifier_mode
         
 
-        self._layer_activations = [] # usually denoted by 'a'
+        self._layer_inputs = [] # usually denoted by 'a'
         self._layer_values = [] # Usually denoted by 'z'
         self._training_data = []
 
@@ -131,7 +131,7 @@ class NeuralNetwork(object):
             act_der_val  = activation_ders[-1](layer_vals[-1])
             error_current = cost_der(prediction, target) * act_der_val
 
-        weight_grad = layer_inputs[-1].T @ error_current 
+        weight_grad = layer_inputs[-1].T @ error_current
         bias_grad = np.sum(error_current, axis=0)[:,np.newaxis]
         layer_grads[-1] = (weight_grad, bias_grad)
 
@@ -159,10 +159,10 @@ class NeuralNetwork(object):
 
         if self._regularization == "L1":
             def reg(weight):
-                return self._reg_param * np.sum(np.abs(weight))
+                return (self._reg_param/weight.size) * np.sum(np.abs(weight))
         elif self._regularization == "L2":
             def reg(weight):
-                return self._reg_param * np.sum(np.square(weight))
+                return self._reg_param/weight.size * np.sum(np.square(weight))
         else:
             def reg(weight):
                 return 0
