@@ -11,7 +11,10 @@ In this project we implemented a Feedforward Neural Network from scratch and tes
 
 ## Requirements
 
-All required python packages are listed in the file `requirements.txt`. These packaged can be installed using the following terminal command: ``pip install -r requirements.txt``
+All required python packages are listed in the file `requirements.txt`. These packaged can be installed using the following terminal command: 
+```
+pip install -r requirements.txt
+```
 
 ## The Code
 All the code used for the project is found in the folder `Code/`. The python file `NeuralNetwork.py` contains a class that implements a flexible neural network. Similarly, `Scheduler.py` contains the a class that implements gradient descent schedulers used by the `NeuralNetwork` class. All additional cost and activation functions are listed in the file `functions.py`. Lastly, the file `plotting.py` contains some configurations to make matplotlib plots look nice.
