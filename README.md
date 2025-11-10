@@ -25,7 +25,7 @@ The jupyter-notebooks contained in `Code/` were used to carry out any calculatio
 
 ### NeuralNetwork
 The `NeuralNetwork` class:
-```
+```python
 NeuralNetwork(n_inputs, n_outputs, n_nodes_hidden_layers, activation_funcs,
               activation_derivs, scheduler, cost_func, cost_func_der,
               reg_param = 0, classifier_mode = False, regularization = None,
@@ -80,19 +80,19 @@ A class implementing a feed-forward neural network with back propagation.
 
 It has the following user-facing methods:
 
-```
+```python
 predict(input_data)
 ```
 Performs a feed forward pass on input_data and returns the resulting prediction.
 
-```
+```python
 train(training_features, training_targets, batch_size, num_epochs)
 ```
 Trains the neural network using training_features and training_targets.
 For gradient descent the training_features are divided into batches of
 size batch_size. The number of epochs is set by num_epochs. Returns nothing.
 
-```
+```python
 reset_weights()
 ```
 Resets the weights be re-initializing them.
@@ -106,22 +106,24 @@ to its initial value.
 
 There are three different Scheduler objects:
 
-```
+```python
 Simple(learning_rate)
 ```
 which does simple gradient descent.
 
-```
+```python
 RMSProp(learning_rate, decay_rate=0.999, num_stab_const=1e-6)
 ```
 which performs gradient descent with the RMSProp optimizer.
 
-```
+```python
 Adam(learning_rate, first_moment = 0.9, second_moment = 0.999, num_stab_const = 1e-8)
 ```
 which performs gradient descent with the Adam optimizer.
 
+### OLS and _LinearRegression
 
+For documentation see https://github.com/Waerstad/4155-Project-1
 
 
 
