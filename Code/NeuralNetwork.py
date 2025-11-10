@@ -5,6 +5,52 @@ from copy import deepcopy
 class NeuralNetwork(object):
     """
     A class implementing a feed-forward neural network with back propagation.
+
+    n_inputs:               The number of nodes in the input layer.
+
+    n_outputs:              The number of nodes in the output layer.
+
+    n_nodes_hidden_layers:  List of the number of nodes in the 
+                            hidden layers.
+
+    activation_funcs:       List containing the activation funcs for 
+                            each hidden layer and the output layer.
+                            The activation for the output layer is
+                            assumed to be the last entry.
+
+    activation_derivs:      List containing the derivatives of the
+                            activation functions.
+
+    scheduler:              The Scheduler used for gradient descent.
+                            Must be a scheduler object.
+
+    cost_func:              The cost func to be used by backpropagation.
+                            Is not used.
+
+    cost_func_der:          The derivative of the cost func to be used by
+                            backpropagation. Is not used if
+                            classifier_mode = True.
+
+    reg_param:              The hyperparameter used as the coefficient
+                            for the regularization term.
+
+    classifier_mode:        Bool that enables classifier mode. If
+                            enabled cost_func and cost_func_der is
+                            ignored and the cost function is always
+                            set to cross-entropy. This mode requires
+                            the output activation function to be
+                            softmax.
+
+    regularization:         String that decides what type of regularization
+                            to use. "L1" gives L_1 regularization. "L2" gives
+                            L_2 regularization. Anything else gives no
+                            regularization. Uses reg_param as the
+                            regularization hyperparameter.
+
+    seed:                   Sets a seed that is used for selecting random
+                            batches and initalizing weights.
+
+
     """
 
     def __init__(
@@ -45,6 +91,9 @@ class NeuralNetwork(object):
         self._init_schedulers()
 
     def _init_weights(self):
+        """
+        initalizes weights.
+        """
         if self._seed != None:
             np.random.seed(self._seed)
 
@@ -63,6 +112,10 @@ class NeuralNetwork(object):
         return weights_biases
     
     def _init_schedulers(self):
+        """
+        Creates and stores a scheduler for each weight
+        and bias matrix.
+        """
         self._weights_schedulers = []
         self._biases_schedulers = []
         for i in self._weights_biases:
@@ -72,6 +125,9 @@ class NeuralNetwork(object):
             self._biases_schedulers.append(scheduler_bias)
 
     def _reset_schedulers(self):
+        """
+        Resets all scheduler objects.
+        """
         for weight_scheduler in self._weights_schedulers:
             weight_scheduler.reset()
         for bias_scheduler in self._biases_schedulers:
@@ -152,10 +208,19 @@ class NeuralNetwork(object):
         return layer_grads
 
     def predict(self, input_data):
+        """
+        Performs a feed forward pass on input_data
+        and returns the resulting prediction.
+        """
         return self._feed_forward_out(input_data)
 
     
     def train(self, training_features, training_targets, batch_size, num_epochs):
+        """
+        Trains the neural network using training_features and training_targets.
+        For gradient descent the training_features are divided into batches of
+        size batch_size. The number of epochs is set by num_epochs. Returns nothing.
+        """
 
         if self._regularization == "L1":
             def reg(weight):
@@ -190,18 +255,10 @@ class NeuralNetwork(object):
             self._reset_schedulers()
 
     def reset_weights(self):
+        """
+        Resets the weights be re-initializing them.
+        """
         self._init_weights()
-
-if __name__ == "__main__":
-
-    def id(x):
-        return x
-    
-    def id_der(x):
-        return 1
-    scheduler = Scheduler.Adam(0.01)
-    nntest = NeuralNetwork(3, 4, [6,7,8,9], [id, id, id, id, id], [id_der, id_der, id_der, id_der, id_der], scheduler)
-    nntest.train()
 
 
 
