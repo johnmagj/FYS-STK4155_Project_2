@@ -77,15 +77,21 @@ A class implementing a feed-forward neural network with back propagation.
 
 It has the following user-facing methods:
 
-```predict(input_data)```
+```
+predict(input_data)
+```
 Performs a feed forward pass on input_data and returns the resulting prediction.
 
-```train(training_features, training_targets, batch_size, num_epochs)```
+```
+train(training_features, training_targets, batch_size, num_epochs)
+```
 Trains the neural network using training_features and training_targets.
 For gradient descent the training_features are divided into batches of
 size batch_size. The number of epochs is set by num_epochs. Returns nothing.
 
-```reset_weights()```
+```
+reset_weights()
+```
 Resets the weights be re-initializing them.
 
 ### Scheduler
@@ -97,13 +103,19 @@ to its initial value.
 
 There are three different Scheduler objects:
 
-```Simple(learning_rate)```
+```
+Simple(learning_rate)
+```
 which does simple gradient descent.
 
-```RMSProp(learning_rate, decay_rate=0.999, num_stab_const=1e-6)```
+```
+RMSProp(learning_rate, decay_rate=0.999, num_stab_const=1e-6)
+```
 which performs gradient descent with the RMSProp optimizer.
 
-```Adam(learning_rate, first_moment = 0.9, second_moment = 0.999, num_stab_const = 1e-8)```
+```
+Adam(learning_rate, first_moment = 0.9, second_moment = 0.999, num_stab_const = 1e-8)
+```
 which performs gradient descent with the Adam optimizer.
 
 
